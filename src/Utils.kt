@@ -1,9 +1,7 @@
-import java.lang.AssertionError
 import java.math.BigInteger
 import java.security.MessageDigest
 import kotlin.io.path.Path
 import kotlin.io.path.readLines
-import kotlin.math.exp
 
 /**
  * Reads lines from the given input txt file.
@@ -40,3 +38,7 @@ fun <T>  List<T>.windowWhen(pred: (T) -> Boolean): List<List<T>> {
     }
     return chunks
 }
+
+
+fun List<Int>.product(): Int = this.reduce { acc, it -> acc * it }
+fun List<Int>.productLong(): Long = this.fold(1L,  { acc, it -> acc * it })
