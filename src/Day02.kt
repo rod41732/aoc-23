@@ -6,7 +6,7 @@ fun main() {
         val colors = show.split(',').map { it.trim() }
         colors.forEach {
             val (num, name) = it.split(' ')
-            val numInt = Integer.parseInt(num)
+            val numInt = num.toInt()
             when (name) {
                 "red" -> counts[0] = numInt
                 "green" -> counts[1] = numInt
@@ -42,7 +42,7 @@ fun main() {
                 val colors = it.split(',').map { it.trim() }
                 colors.forEach {
                     val (num, name) = it.split(' ')
-                    val numInt = Integer.parseInt(num)
+                    val numInt = num.toInt()
                     when (name) {
                         "red" -> counts[0] = max(counts[0], numInt)
                         "green" -> counts[1] = max(counts[1], numInt)

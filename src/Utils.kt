@@ -28,3 +28,15 @@ fun <T>assertEqual(actual: T, expected: T) {
         throw AssertionError("Expected $expected, got $actual")
     }
 }
+
+fun <T>  List<T>.windowWhen(pred: (T) -> Boolean): List<List<T>> {
+    val chunks: MutableList<MutableList<T>> = mutableListOf(mutableListOf())
+    forEach {
+        if (pred(it)) {
+            chunks.add(mutableListOf())
+        } else {
+            chunks.last().add(it)
+        }
+    }
+    return chunks
+}

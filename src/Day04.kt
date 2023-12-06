@@ -10,7 +10,7 @@ fun main() {
         return input
             .map {
                 val (winnings, owned) = it.substringAfter(":").split("|").map {
-                    it.trim().split(" ").filter { !it.isBlank() }.map { Integer.parseInt(it) }
+                    it.trim().split(" ").filter { !it.isBlank() }.map { it.toInt() }
                 }
                 val cnt = owned.count { winnings.contains(it) }
 
@@ -26,7 +26,7 @@ fun main() {
         val matches = input
             .map {
                 val (winnings, owned) = it.substringAfter(":").split("|").map {
-                    it.trim().split(" ").filter { !it.isBlank() }.map { Integer.parseInt(it) }
+                    it.trim().split(" ").filter { !it.isBlank() }.map { it.toInt() }
                 }
                 val cnt = owned.count { winnings.contains(it) }
                 cnt

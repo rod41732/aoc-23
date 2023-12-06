@@ -95,7 +95,7 @@ fun main() {
 
                 chars += ".${input[px].substring((y + lb)..(y + rb))}"
             }
-            return Regex("\\d+").findAll(chars).map { Integer.parseInt(it.value) }.toList()
+            return Regex("\\d+").findAll(chars).map { it.value.toInt() }.toList()
         }
 
         input.forEachIndexed { i, row ->
