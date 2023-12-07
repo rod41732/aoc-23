@@ -42,3 +42,6 @@ fun <T>  List<T>.windowWhen(pred: (T) -> Boolean): List<List<T>> {
 
 fun List<Int>.product(): Int = this.reduce { acc, it -> acc * it }
 fun List<Int>.productLong(): Long = this.fold(1L,  { acc, it -> acc * it })
+
+// (this || other) as in other programming language
+fun Int.valueIfZero(other: Int) = if (this != 0) this else other
