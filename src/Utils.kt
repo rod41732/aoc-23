@@ -45,3 +45,7 @@ fun List<Int>.productLong(): Long = this.fold(1L,  { acc, it -> acc * it })
 
 // (this || other) as in other programming language
 fun Int.valueIfZero(other: Int) = if (this != 0) this else other
+
+private val NUMBER_REGEX = Regex("[-+\\d]+")
+// convenience method to convert line of numbers to list of ints
+fun String.toInts() = NUMBER_REGEX.findAll(this).map { it.value.toInt() }.toList()
