@@ -22,31 +22,27 @@ fun main() {
         startNode: String,
         isEnd: (node: Node) -> Boolean
     ): Int {
-        var count = 0
         var curNode = graph.get(startNode)!!
-        while (true) {
-            instruction.forEach {
-                if (isEnd(curNode)) {
-                    return count
+        instruction.asSequence().repeat().forEachIndexed { idx, it ->
+            if (isEnd(curNode)) return idx
+            curNode = graph.get(
+                when (it) {
+                    'L' -> curNode.left
+                    'R' -> curNode.right
+                    else -> throw Exception("Invalid instruction: '$it'")
                 }
-                count++
-                curNode = graph.get(
-                    when (it) {
-                        'L' -> curNode.left
-                        'R' -> curNode.right
-                        else -> throw Exception("Invalid instruction: '$it'")
-                    }
-                )!!
-            }
+            )!!
         }
+        throw Exception("Should be unreachable")
     }
 
-    fun parseInput(input: List<String>): Pair<String, MutableMap<String, Node>> {
-        val graph = mutableMapOf<String, Node>()
+    fun parseInput(input: List<String>): Pair<String, Map<String, Node>> {
         val instruction = input.first()
-        input.drop(2).forEach {
-            val (a, b, c) = Regex("([A-Z]{3}) = \\(([A-Z]{3}), ([A-Z]{3})\\)").find(it)!!.groupValues.drop(1)
-            graph.put(a, Node(a, b, c))
+        val graph = buildMap {
+            input.drop(2).forEach {
+                val (a, b, c) = Regex("([A-Z]{3}) = \\(([A-Z]{3}), ([A-Z]{3})\\)").find(it)!!.groupValues.drop(1)
+                this[a] = Node(a, b, c)
+            }
         }
         return Pair(instruction, graph)
     }
@@ -74,7 +70,7 @@ fun main() {
     assertEqual(part1(testInput2), 6)
 
     val input = readInput("Day08")
-    println("Part1: ${part1(input)}")
-    println("Part2: ${part2(input)}")
+    println("Part1: ${part1(input)}") // 19199
+    println("Part2: ${part2(input)}") // 13663968099527
 }
 

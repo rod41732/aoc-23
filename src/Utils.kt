@@ -49,3 +49,5 @@ private val NUMBER_REGEX = Regex("[-+\\d]+")
 // convenience method to convert line of numbers to list of ints
 fun String.toInts() = NUMBER_REGEX.findAll(this).map { it.value.toInt() }.toList()
 
+fun <T> Sequence<T>.repeat() = sequence<T> { while (true) yieldAll(this@repeat) }
+
